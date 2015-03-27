@@ -12,7 +12,10 @@
     <%= render 'layouts/header' %>
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>   
+         <!-- returns an HTML block tag of type name (1st arg) surrounding the content (2nd arg). 
+         Add HTML attributes by passing an attributes hash to options (3rd arg).
+         An 'ugly' version: <div class="alert alert-<%= message_type %>"><%= message %></div> -->
       <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>

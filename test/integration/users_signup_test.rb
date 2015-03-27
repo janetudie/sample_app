@@ -11,6 +11,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                password_confirmation: "bar" }
     end
     assert_template 'users/new'
+    assert_select 'div#error_explanation' # searches for a div with this id in resulting file
+    assert_select 'div.field_with_errors' # like above but for class
+
+    assert_not flash.nil?
   end
 
   test "valid signup information" do
@@ -22,5 +26,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                             password_confirmation: "password" }
     end
     assert_template 'users/show'  # verifies that the user show template renders after succesful signup
+    assert is_logged_in?
   end
 end
