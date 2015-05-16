@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
+  before_create { UserMailer.welcome_email(self).deliver_now }
+
 
 
   # returns the hash digest of the given string.
